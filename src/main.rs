@@ -1,29 +1,47 @@
 const BOARD_SOLVED:[usize; 2] = [10, 10];
 fn main() {
-    let board: [[i8; 9]; 9] =   [   
-                                    [4, 0, 1, 2, 9, 0, 0, 7, 5],
-                                    [2, 0, 0, 3, 0, 0, 8, 0, 0],
-                                    [0, 7, 0, 0, 8, 0, 0, 0, 6],
-                                    [0, 0, 0, 1, 0, 3, 0, 6, 2],
-                                    [1, 0, 5, 0, 0, 0, 4, 0, 3],
-                                    [7, 3, 0, 6, 0, 8, 0, 0, 0],
-                                    [6, 0, 0, 0, 2, 0, 0, 3, 0],
-                                    [0, 0, 7, 0, 0, 1, 0, 0, 4],
-                                    [8, 9, 0, 0, 6, 5, 1, 0, 7]
-                                ];
+    // let board: [[i8; 9]; 9] =   [
+    //                                 [4, 0, 1, 2, 9, 0, 0, 7, 5],
+    //                                 [2, 0, 0, 3, 0, 0, 8, 0, 0],
+    //                                 [0, 7, 0, 0, 8, 0, 0, 0, 6],
+    //                                 [0, 0, 0, 1, 0, 3, 0, 6, 2],
+    //                                 [1, 0, 5, 0, 0, 0, 4, 0, 3],
+    //                                 [7, 3, 0, 6, 0, 8, 0, 0, 0],
+    //                                 [6, 0, 0, 0, 2, 0, 0, 3, 0],
+    //                                 [0, 0, 7, 0, 0, 1, 0, 0, 4],
+    //                                 [8, 9, 0, 0, 6, 5, 1, 0, 7]
+    //                             ];
+
+    let board: [[i8; 9]; 9] =   [
+        [5, 3, 0, 0, 7, 8, 9, 1, 2 ],
+        [6, 0, 0, 1, 9, 5, 0, 0, 0 ],
+        [0, 9, 8, 0, 0, 0, 0, 6, 7 ],
+        [8, 0, 0, 0, 6, 0, 0, 0, 3 ],
+        [4, 0, 0, 8, 0, 3, 0, 0, 1 ],
+        [7, 0, 0, 0, 2, 0, 0, 0, 6 ],
+        [0, 6, 0, 0, 0, 0, 2, 8, 0 ],
+        [0, 0, 0, 4, 1, 9, 0, 0, 5 ],
+        [0, 0, 0, 0, 8, 0, 0, 7, 9 ]
+    ];
 
     
-    print_board(board);
+    print_board(&board);
 
     let solved: [[i8; 9]; 9] = solve(board);
 
     println!("Solved board:");
-    print_board(solved);
+    print_board(&solved);
 }
 
 fn is_valid(board: [[i8; 9]; 9], number: i8, row: usize, column: usize) -> bool {
     for i in 0..9 {
         if board[row][i] == number {
+            return false;
+        }
+    }
+
+    for j in 0..9 {
+        if board[j][column] == number {
             return false;
         }
     }
@@ -49,7 +67,7 @@ fn find_empty(board: [[i8; 9]; 9]) -> [usize; 2] {
             }
         }
     }
-   return BOARD_SOLVED;
+    return BOARD_SOLVED;
 }
 
 fn solve(board: [[i8; 9]; 9]) -> [[i8; 9]; 9] {
@@ -77,7 +95,7 @@ fn solve(board: [[i8; 9]; 9]) -> [[i8; 9]; 9] {
     return board;
 }
 
-fn print_board(board: [[i8; 9]; 9]) {
+fn print_board(board: &[[i8; 9]; 9]) {
 
     for i in 0..9 {
         if i != 0 && i % 3 == 0 {
